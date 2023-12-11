@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Namer App',
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 10, 10, 10)),
       ),
       home: MyHomePage(),
     );
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
               index: _selectedIndex,
               children: [
                 GeneratorPage(),
-                FavoritesPage(), // Ensure this is the second widget
+                FavoritesPage(),
               ],
             ),
           ),
@@ -106,32 +106,44 @@ class GeneratorPage extends StatelessWidget {
       icon = Icons.favorite_border;
     }
 
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          BigCard(pair: pair),
-          SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {
-                  appState.toggleFavorite();
-                },
-                icon: Icon(icon),
-                label: Text('Like'),
-              ),
-              SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
-                  appState.getNext();
-                },
-                child: Text('Next'),
-              ),
-            ],
-          ),
-        ],
+    return Container(
+      color: Colors.black45,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BigCard(pair: pair),
+            SizedBox(height: 10),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () {
+                    appState.toggleFavorite();
+                  },
+                  icon: Icon(icon),
+                  label: Text('Like',),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blueGrey,
+                    onPrimary: Colors.white
+                  ),
+                  
+                ),
+                SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    appState.getNext();
+                  },
+                  child: Text('Next'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blueGrey,
+                    onPrimary: Colors.white
+                  )
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -149,7 +161,7 @@ class BigCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final style = theme.textTheme.displayMedium!.copyWith(
-      color: theme.colorScheme.onPrimary,
+      color: Colors.black45,
     );
     return Padding(
       padding: const EdgeInsets.all(8.0),
